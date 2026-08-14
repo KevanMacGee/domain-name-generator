@@ -248,15 +248,15 @@
       text-align: center;
     }
 
-    .beast-mode-section {
+    .bulk-search-section {
       margin-top: 30px;
     }
 
-    .beast-mode-panel {
+    .bulk-search-panel {
       padding: 16px;
     }
 
-    .beast-mode-header {
+    .bulk-search-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -264,11 +264,11 @@
       margin-bottom: 12px;
     }
 
-    .beast-mode-header .section-heading {
+    .bulk-search-header .section-heading {
       margin-bottom: 0;
     }
 
-    .beast-text {
+    .bulk-search-text {
       display: block;
       width: 100%;
       min-height: 94px;
@@ -282,7 +282,7 @@
       line-height: 1.6;
     }
 
-    .beast-text:focus {
+    .bulk-search-text:focus {
       border-color: var(--accent);
       outline: none;
       box-shadow: 0 0 0 4px rgba(40, 107, 93, 0.11);
@@ -322,7 +322,7 @@
         padding: 12px;
       }
 
-      .beast-mode-header {
+      .bulk-search-header {
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
@@ -365,13 +365,13 @@
       </div>
     </section>
 
-    <section class="beast-mode-section" aria-labelledby="beast-mode-title">
-      <div class="beast-mode-header">
-        <h2 id="beast-mode-title" class="section-heading">Namecheap Beast Mode</h2>
+    <section class="bulk-search-section" aria-labelledby="bulk-search-title">
+      <div class="bulk-search-header">
+        <h2 id="bulk-search-title" class="section-heading">Bulk Search Mode</h2>
         <button class="button button-secondary" id="copy-button" type="button" disabled>Copy All</button>
       </div>
-      <div class="panel beast-mode-panel">
-        <textarea class="beast-text" id="beast-text" rows="3" readonly aria-label="Generated names for Namecheap Beast Mode" placeholder="Generated names will be listed here, separated by commas."></textarea>
+      <div class="panel bulk-search-panel">
+        <textarea class="bulk-search-text" id="bulk-search-text" rows="3" readonly aria-label="Generated names for Bulk Search Mode" placeholder="Generated names will be listed here, separated by commas."></textarea>
         <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
       </div>
     </section>
@@ -408,7 +408,7 @@
       const error = document.querySelector('#word-error');
       const resultsGrid = document.querySelector('#results-grid');
       const resultCount = document.querySelector('#result-count');
-      const beastText = document.querySelector('#beast-text');
+      const bulkSearchText = document.querySelector('#bulk-search-text');
       const copyButton = document.querySelector('#copy-button');
       const copyStatus = document.querySelector('#copy-status');
       let generatedNames = [];
@@ -432,7 +432,7 @@
         }
 
         resultCount.textContent = `${names.length} ${names.length === 1 ? 'name' : 'names'}`;
-        beastText.value = names.join(', ');
+        bulkSearchText.value = names.join(', ');
         copyButton.disabled = names.length === 0;
       }
 
@@ -461,17 +461,17 @@
       }
 
       async function copyAll() {
-        const text = beastText.value;
+        const text = bulkSearchText.value;
         if (!text) return;
 
         try {
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
           } else {
-            beastText.focus();
-            beastText.select();
+            bulkSearchText.focus();
+            bulkSearchText.select();
             document.execCommand('copy');
-            beastText.setSelectionRange(0, 0);
+            bulkSearchText.setSelectionRange(0, 0);
           }
           copyButton.textContent = 'Copied';
           copyStatus.textContent = 'Names copied to your clipboard.';
