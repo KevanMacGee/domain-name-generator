@@ -114,16 +114,28 @@
       font-weight: 700;
     }
 
-    .startup-demo-change {
+    .startup-demo-slot {
+      position: relative;
       display: inline-block;
-      min-width: 9.8ch;
-      padding: 1px 9px 2px;
-      border: 2px solid transparent;
+      vertical-align: baseline;
+    }
+
+    .startup-demo-reserve {
+      display: inline-block;
+      visibility: hidden;
+      white-space: nowrap;
+    }
+
+    .startup-demo-change {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-block;
       color: inherit;
       font: inherit;
       transform-origin: center;
       transition: opacity 160ms ease, transform 160ms ease;
-      vertical-align: baseline;
+      white-space: nowrap;
     }
 
     .startup-demo-change.is-changing {
@@ -132,7 +144,9 @@
     }
 
     .startup-demo-change.startup-word {
-      border-color: var(--border);
+      top: -3px;
+      padding: 1px 9px 2px;
+      border: 2px solid var(--border);
       border-radius: 999px;
       color: var(--primary);
       background: #e0e7ff;
@@ -454,7 +468,7 @@
 
     <section class="panel generator-panel">
       <form id="generator-form" novalidate>
-        <p class="startup-demo" aria-label="Take a normal word like domain and make it sound startup-y.">Take a normal word like <strong>domain</strong> and make it <span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span></p>
+        <p class="startup-demo" aria-label="Take a normal word like domain and make it sound startup-y.">Take a normal word like <strong>domain</strong> and make it <span class="startup-demo-slot"><span class="startup-demo-reserve" aria-hidden="true">sound startup-y</span><span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span></span></p>
         <label class="field-label" for="base-word">Base word</label>
         <div class="input-row">
           <input class="text-input" id="base-word" name="base-word" type="text" placeholder="Type a word here" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="word-note word-error">
