@@ -117,6 +117,8 @@
     .startup-demo-change {
       display: inline-block;
       min-width: 9.8ch;
+      padding: 1px 9px 2px;
+      border: 2px solid transparent;
       color: inherit;
       font: inherit;
       transform-origin: center;
@@ -130,8 +132,7 @@
     }
 
     .startup-demo-change.startup-word {
-      padding: 1px 9px 2px;
-      border: 2px solid var(--border);
+      border-color: var(--border);
       border-radius: 999px;
       color: var(--primary);
       background: #e0e7ff;
@@ -453,7 +454,7 @@
 
     <section class="panel generator-panel">
       <form id="generator-form" novalidate>
-        <p class="startup-demo" aria-label="Take a normal word like domain and make it sound startup-y.">Take a normal word like <strong>domain</strong> and make it <span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span>.</p>
+        <p class="startup-demo" aria-label="Take a normal word like domain and make it sound startup-y.">Take a normal word like <strong>domain</strong> and make it <span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span></p>
         <label class="field-label" for="base-word">Base word</label>
         <div class="input-row">
           <input class="text-input" id="base-word" name="base-word" type="text" placeholder="Type a word here" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="word-note word-error">
