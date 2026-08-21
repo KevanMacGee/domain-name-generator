@@ -126,10 +126,18 @@
       white-space: nowrap;
     }
 
-    .startup-demo-change {
+    .startup-demo-live {
       position: absolute;
       top: 0;
       left: 0;
+      display: inline-flex;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+
+    .startup-demo-change {
+      position: relative;
+      top: 0;
       display: inline-block;
       color: inherit;
       font: inherit;
@@ -173,7 +181,7 @@
 
     .startup-demo-replay {
       visibility: hidden;
-      margin-left: 10px;
+      margin-left: 14px;
       padding: 0;
       border: 0;
       color: var(--muted-foreground);
@@ -512,7 +520,7 @@
 
     <section class="panel generator-panel">
       <form id="generator-form" novalidate>
-        <p class="startup-demo" id="startup-demo" aria-label="Take a normal word like task and make it sound startup-y.">Take a normal word like <strong id="startup-demo-base">task</strong> and make it <span class="startup-demo-slot"><span class="startup-demo-reserve" aria-hidden="true">sound startup-y</span><span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span></span><button class="startup-demo-replay" id="startup-demo-replay" type="button" aria-label="Replay with the next word" disabled>↻ Replay</button></p>
+        <p class="startup-demo" id="startup-demo" aria-label="Take a normal word like task and make it sound startup-y.">Take a normal word like <strong id="startup-demo-base">task</strong> and make it <span class="startup-demo-slot"><span class="startup-demo-reserve" aria-hidden="true">sound startup-y</span><span class="startup-demo-live"><span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span><button class="startup-demo-replay" id="startup-demo-replay" type="button" aria-label="Replay with the next word" disabled>↻</button></span></span></p>
         <label class="field-label" for="base-word">Base word</label>
         <div class="input-row">
           <input class="text-input" id="base-word" name="base-word" type="text" placeholder="Type a word here" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="word-note word-error">
