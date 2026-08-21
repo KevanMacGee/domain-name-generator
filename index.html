@@ -143,6 +143,17 @@
       transform: rotateX(82deg) scale(0.96);
     }
 
+    .startup-demo-change::after {
+      position: absolute;
+      top: 0;
+      left: calc(100% + 3px);
+      color: var(--muted-foreground);
+      content: ".";
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: normal;
+    }
+
     .startup-demo-change.startup-word {
       top: -3px;
       padding: 1px 9px 2px;
@@ -154,6 +165,39 @@
       font-family: var(--font-mono);
       font-weight: 700;
       letter-spacing: -0.03em;
+    }
+
+    .startup-demo-change.startup-word::after {
+      top: 3px;
+    }
+
+    .startup-demo-replay {
+      visibility: hidden;
+      margin-left: 10px;
+      padding: 0;
+      border: 0;
+      color: var(--muted-foreground);
+      background: transparent;
+      font: inherit;
+      font-size: 0.78em;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      transition: color 160ms ease, opacity 160ms ease;
+    }
+
+    .startup-demo-replay.is-visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .startup-demo-replay:hover {
+      color: var(--foreground);
+    }
+
+    .startup-demo-replay:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 3px;
     }
 
     .panel {
@@ -468,7 +512,7 @@
 
     <section class="panel generator-panel">
       <form id="generator-form" novalidate>
-        <p class="startup-demo" aria-label="Take a normal word like domain and make it sound startup-y.">Take a normal word like <strong>domain</strong> and make it <span class="startup-demo-slot"><span class="startup-demo-reserve" aria-hidden="true">sound startup-y</span><span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span></span></p>
+        <p class="startup-demo" id="startup-demo" aria-label="Take a normal word like task and make it sound startup-y.">Take a normal word like <strong id="startup-demo-base">task</strong> and make it <span class="startup-demo-slot"><span class="startup-demo-reserve" aria-hidden="true">sound startup-y</span><span class="startup-demo-change" id="startup-demo-change" aria-hidden="true">sound startup-y</span></span><button class="startup-demo-replay" id="startup-demo-replay" type="button" aria-label="Replay with the next word" disabled>↻ Replay</button></p>
         <label class="field-label" for="base-word">Base word</label>
         <div class="input-row">
           <input class="text-input" id="base-word" name="base-word" type="text" placeholder="Type a word here" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="word-note word-error">
@@ -527,30 +571,90 @@
         (word) => `${word}folio`
       ];
 
+      const startupDemo = document.querySelector('#startup-demo');
+      const startupDemoBase = document.querySelector('#startup-demo-base');
       const startupDemoChange = document.querySelector('#startup-demo-change');
-      const startupDemoWords = ['sound startup-y', 'domainify', 'domainly', 'domainio', 'domainster', 'domainhub'];
-      let startupDemoIndex = 0;
+      const startupDemoReplay = document.querySelector('#startup-demo-replay');
+      const startupDemoBaseWords = ['task', 'link', 'cloud', 'track', 'note', 'board', 'launch'];
+      const startupDemoReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let startupDemoWordIndex = Math.floor(Math.random() * startupDemoBaseWords.length);
+      let startupDemoTimer;
 
-      function advanceStartupDemo() {
+      function getStartupDemoWords(word) {
+        return ['sound startup-y', `${word}ify`, `${word}ly`, `${word}io`, `${word}ster`, `${word}hub`];
+      }
+
+      function setStartupDemoText(text, isStartupWord) {
+        if (!startupDemo || !startupDemoChange) return;
+
+        startupDemoChange.textContent = text;
+        startupDemoChange.classList.toggle('startup-word', isStartupWord);
+        startupDemo.setAttribute(
+          'aria-label',
+          `Take a normal word like ${startupDemoBaseWords[startupDemoWordIndex]} and make it ${text}.`
+        );
+      }
+
+      function showStartupDemoReplay() {
+        if (!startupDemoReplay) return;
+        startupDemoReplay.disabled = false;
+        startupDemoReplay.classList.add('is-visible');
+      }
+
+      function advanceStartupDemo(words, nextIndex) {
         if (!startupDemoChange) return;
 
         startupDemoChange.classList.add('is-changing');
 
         window.setTimeout(() => {
-          startupDemoIndex = (startupDemoIndex + 1) % startupDemoWords.length;
-          const nextText = startupDemoWords[startupDemoIndex];
-          startupDemoChange.textContent = nextText;
-          startupDemoChange.classList.toggle('startup-word', startupDemoIndex !== 0);
+          setStartupDemoText(words[nextIndex], true);
 
           window.requestAnimationFrame(() => {
             startupDemoChange.classList.remove('is-changing');
           });
+
+          if (nextIndex < words.length - 1) {
+            startupDemoTimer = window.setTimeout(
+              () => advanceStartupDemo(words, nextIndex + 1),
+              1800
+            );
+          } else {
+            window.setTimeout(showStartupDemoReplay, 160);
+          }
         }, 160);
       }
 
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        window.setInterval(advanceStartupDemo, 1800);
+      function runStartupDemo() {
+        if (!startupDemoBase || !startupDemoChange) return;
+
+        window.clearTimeout(startupDemoTimer);
+        const word = startupDemoBaseWords[startupDemoWordIndex];
+        const words = getStartupDemoWords(word);
+        startupDemoBase.textContent = word;
+        setStartupDemoText(words[0], false);
+
+        if (startupDemoReplay) {
+          startupDemoReplay.disabled = true;
+          startupDemoReplay.classList.remove('is-visible');
+        }
+
+        if (startupDemoReducedMotion) {
+          setStartupDemoText(words[words.length - 1], true);
+          showStartupDemoReplay();
+          return;
+        }
+
+        startupDemoTimer = window.setTimeout(() => advanceStartupDemo(words, 1), 1800);
       }
+
+      if (startupDemoReplay) {
+        startupDemoReplay.addEventListener('click', () => {
+          startupDemoWordIndex = (startupDemoWordIndex + 1) % startupDemoBaseWords.length;
+          runStartupDemo();
+        });
+      }
+
+      runStartupDemo();
 
       const form = document.querySelector('#generator-form');
       const input = document.querySelector('#base-word');
