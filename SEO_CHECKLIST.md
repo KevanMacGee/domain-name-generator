@@ -72,9 +72,9 @@ Suggested markup:
 
 ## Priority 4: add site-name structured data
 
-- [ ] Confirm that `SaaS App Name Generator` is the final public site name and use it consistently in the visible page, Open Graph tags, and structured data.
-- [ ] Add one `WebSite` JSON-LD block to the home page.
-- [ ] Keep all JSON-LD claims accurate and reflected by visible page content.
+- [x] Confirm that `SaaS App Name Generator` is the final public site name and use it consistently in the visible page, Open Graph tags, and structured data.
+- [x] Add one `WebSite` JSON-LD block to the home page.
+- [x] Keep all JSON-LD claims accurate and reflected by visible page content.
 - [ ] Do not expect structured data to guarantee a special search result or improve ranking by itself.
 
 Suggested markup:
@@ -97,7 +97,7 @@ Suggested markup:
 
 ## Priority 5: add crawl-discovery files
 
-- [ ] Create `sitemap.xml` in the site root with only the canonical home-page URL.
+- [x] Create `sitemap.xml` in the site root with only the canonical home-page URL.
 - [ ] Do not add `<priority>` or `<changefreq>`; Google ignores them.
 - [ ] Add `<lastmod>` only if the date can be kept accurate when the page changes significantly.
 
@@ -112,8 +112,8 @@ Suggested `sitemap.xml`:
 </urlset>
 ```
 
-- [ ] Create `robots.txt` in the site root.
-- [ ] Allow normal crawling and point crawlers to the sitemap.
+- [x] Create `robots.txt` in the site root.
+- [x] Allow normal crawling and point crawlers to the sitemap.
 - [ ] Do not use `robots.txt` to keep a page out of search results; use `noindex` or access control for that job.
 
 Suggested `robots.txt`:
@@ -145,7 +145,7 @@ Do not copy `index,follow` merely because it appears in the reference site. Inde
 
 Metadata cannot replace useful visible content.
 
-- [ ] Correct `twentyone` in the subtitle to `twenty-one` or `21`.
+- [x] Correct `twentyone` in the subtitle to `twenty-one`.
 - [ ] Confirm the first screen plainly states what the tool does and who it is for.
 - [ ] Consider adding a short, static “How it works” section if the page remains very light on crawlable explanatory copy.
 - [ ] Keep the H1 unique and descriptive.
