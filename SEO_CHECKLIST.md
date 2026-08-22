@@ -42,7 +42,7 @@ Suggested markup:
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SaaS App Name Generator">
 <meta property="og:title" content="SaaS App Name Generator | Startup Name Ideas">
-<meta property="og:description" content="Generate 21 startup and SaaS app name variations from one word, then copy the list into any bulk domain search tool.">
+<meta property="og:description" content="Generate startup and SaaS app name variations from one word, then copy the list into any bulk domain search tool.">
 <meta property="og:url" content="https://saasappnamegenerator.com/">
 <meta property="og:image" content="https://saasappnamegenerator.com/og-image.png">
 <meta property="og:image:type" content="image/png">
@@ -52,7 +52,7 @@ Suggested markup:
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SaaS App Name Generator | Startup Name Ideas">
-<meta name="twitter:description" content="Generate 21 startup and SaaS app name variations from one word, then copy the list into any bulk domain search tool.">
+<meta name="twitter:description" content="Generate startup and SaaS app name variations from one word, then copy the list into any bulk domain search tool.">
 <meta name="twitter:image" content="https://saasappnamegenerator.com/og-image.png">
 <meta name="twitter:image:alt" content="SaaS App Name Generator interface showing generated startup name ideas">
 ```
@@ -87,7 +87,7 @@ Suggested markup:
   "@id": "https://saasappnamegenerator.com/#website",
   "url": "https://saasappnamegenerator.com/",
   "name": "SaaS App Name Generator",
-  "description": "Generate 21 startup and SaaS app name variations from one word, then copy the list into any bulk domain search tool.",
+  "description": "Generate startup and SaaS app name variations from one word, then copy the list into any bulk domain search tool.",
   "inLanguage": "en"
 }
 </script>
@@ -145,7 +145,7 @@ Do not copy `index,follow` merely because it appears in the reference site. Inde
 
 Metadata cannot replace useful visible content.
 
-- [x] Correct `twentyone` in the subtitle to `twenty-one`.
+- [x] Use general name-variation wording in the subtitle and metadata instead of a fixed output count.
 - [ ] Confirm the first screen plainly states what the tool does and who it is for.
 - [ ] Consider adding a short, static “How it works” section if the page remains very light on crawlable explanatory copy.
 - [ ] Keep the H1 unique and descriptive.
